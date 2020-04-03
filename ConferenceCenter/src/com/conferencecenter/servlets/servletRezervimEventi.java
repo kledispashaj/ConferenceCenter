@@ -18,43 +18,26 @@ import com.conferencecenter.daos.SallaDAO;
 public class servletRezervimEventi extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		
 		try
 		{	  
-			
-			 
 			HttpSession session = request.getSession();
 			UserObj user = (UserObj) session.getAttribute("currentSessionUser"); 
 			String name = user.getUsername();
 			
 			java.sql.Date date=Date.valueOf(request.getParameter("data"));
 
-		   
-		    
-		  
-			
-            
-			
 		     EventObj  eventi = new EventObj();
 		     eventi.setUsername(name);
 		     eventi.setEventname(request.getParameter("emerEventi"));
 		     eventi.setPershkrim(request.getParameter("pershkrim"));
-		     
 		     eventi.setData(date);
-		    
 		     eventi.setStatusi(0);
 		     eventi.setSallaID( SallaDAO.getSallaID(request.getParameter("salla")));
 		    
-
 		     EventeDAO.Rezervo(eventi);
-		    
 		     response.sendRedirect("User/EventeUseri.jsp");
-			   		    
-		      
 		}		
 				
 		catch (Throwable theException) 	    
@@ -62,11 +45,6 @@ public class servletRezervimEventi extends HttpServlet {
 		     System.out.println("Nuk punon dergimi i formes se rezervimit te salles "+ theException); 
 		}
 		
-		
-		
-		
 	}
-	
-	
 
 }
